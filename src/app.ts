@@ -3,6 +3,7 @@ import helmet from "helmet";
 import cors from "cors";
 import morgan from "morgan";
 import { errorHandler } from "./middlewares";
+import { healthRouter } from "./routes";
 
 const app = express();
 
@@ -15,14 +16,7 @@ app.get("/", (_req, res) => {
   res.send("Server is alive!");
 });
 
-app.get("/health", (_req, res) => {
-  res.status(200).json({
-    status: "ok",
-    version: "1.0.0",
-    timestamp: new Date().toISOString(),
-    uptime: process.uptime(),
-  });
-});
+app.use("/health", healthRouter);
 
 app.use(errorHandler);
 
