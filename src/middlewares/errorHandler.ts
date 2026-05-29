@@ -14,7 +14,7 @@ const errorHandler = (
   res: Response,
   _next: NextFunction,
 ) => {
-  logger.error(`An error occurred ${err.stack}`)
+  logger.error(`An error occurred \n${err.stack}`)
   if (err instanceof HttpError) {
     return res.status(err.statusCode).json({
       status: "error",
