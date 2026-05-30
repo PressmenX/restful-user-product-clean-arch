@@ -1,8 +1,17 @@
-POST http://localhost:8080/register
+### 1. Test Validasi (Harus Gagal 400)
+POST http://localhost:8080/users/register
 Content-Type: application/json
 
-{
-    "name": "Budi",
-    "email": "budi@gmail.id",
-    "password": "rahasiaSuper123"
-}
+{ "name": "A", "email": "bukan-email" }
+
+### 2. Test Berhasil (Harus Sukses 201)
+POST http://localhost:8080/users/register
+Content-Type: application/json
+
+{ "name": "Tamu Baru", "email": "tamu@gmail.com", "password": "password123" }
+
+### 3. Test Duplikat (Harus Gagal 409)
+POST http://localhost:8080/users/register
+Content-Type: application/json
+
+{ "name": "Tamu Baru", "email": "tamu@gmail.com", "password": "password123" }

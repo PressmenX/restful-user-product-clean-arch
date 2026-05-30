@@ -9,12 +9,11 @@ const validate =
 
     if (!result.success) {
       const issues = result.error.issues.map((issue) => issue.message);
-      console.log(issues);
       AppError.validationError(issues.join(", "));
     }
 
-    req.body = result.data
-    next()
+    req.body = result.data;
+    next();
   };
 
 export default validate;

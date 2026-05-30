@@ -1,3 +1,4 @@
-import healthRouter from "./health";
+import healthRouter from "./health.route";
+import userRouter from "./user.route";
 
-export { healthRouter };
+export { healthRouter, userRouter };

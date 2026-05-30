@@ -3,9 +3,7 @@ import helmet from "helmet";
 import cors from "cors";
 import morgan from "morgan";
 import { errorHandler } from "./middlewares";
-import { healthRouter } from "./routes";
-import validate from "./middlewares/validate";
-import { registerUserSchema } from "./schemas/registerInput";
+import { healthRouter, userRouter } from "./routes";
 
 const app = express();
 
@@ -19,9 +17,7 @@ app.get("/", (_req, res) => {
 });
 
 app.use("/health", healthRouter);
-app.post("/register", validate(registerUserSchema), (req, res) => {
-  res.json({ data: req.body });
-});
+app.use("/users", userRouter)
 
 app.use(errorHandler);
 
