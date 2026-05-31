@@ -16,17 +16,25 @@ class HttpError extends Error {
   }
 }
 
-const thrower = (msg: string, type: ErrorType, code: number) => {
-  throw new HttpError(msg, type, code);
-};
-
 const AppError = {
-  validationError: (msg: string) => thrower(msg, "VALIDATION_ERROR", 400),
-  unauthorized: (msg: string) => thrower(msg, "UNAUTHORIZED", 401),
-  forbidden: (msg: string) => thrower(msg, "FORBIDDEN_ACCESS", 403),
-  notFound: (msg: string) => thrower(msg, "RESOURCE_NOT_FOUND", 404),
-  conflict: (msg: string) => thrower(msg, "DATA_CONFLICT", 409),
-  serverError: (msg: string) => thrower(msg, "INTERNAL_SERVER_ERROR", 500),
+  validationError: (msg: string): never => {
+    throw new HttpError(msg, "VALIDATION_ERROR", 400);
+  },
+  unauthorized: (msg: string) => {
+    throw new HttpError(msg, "UNAUTHORIZED", 401);
+  },
+  forbidden: (msg: string) => {
+    throw new HttpError(msg, "FORBIDDEN_ACCESS", 403);
+  },
+  notFound: (msg: string) => {
+    throw new HttpError(msg, "RESOURCE_NOT_FOUND", 404);
+  },
+  conflict: (msg: string) => {
+    throw new HttpError(msg, "DATA_CONFLICT", 409);
+  },
+  serverError: (msg: string) => {
+    throw new HttpError(msg, "INTERNAL_SERVER_ERROR", 500);
+  },
 };
 
-export {HttpError, AppError, ErrorType}
+export { HttpError, AppError, ErrorType };

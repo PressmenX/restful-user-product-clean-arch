@@ -8,7 +8,7 @@ const makeRegisterUser =
     const registered = await repo.findByEmail(inputDTO.email);
 
     if (registered) {
-      AppError.conflict("Email is already in use");
+      throw AppError.conflict("Email is already in use");
     }
 
     const hashPassword = await bcrypt.hash(inputDTO.password, 10);

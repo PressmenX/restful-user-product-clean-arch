@@ -9,7 +9,7 @@ const validate =
 
     if (!result.success) {
       const issues = result.error.issues.map((issue) => issue.message);
-      AppError.validationError(issues.join(", "));
+      throw AppError.validationError(issues.join(", "));
     }
 
     req.body = result.data;
