@@ -1,24 +1,16 @@
-### 1. Test Validasi (Harus Gagal 400)
-POST http://localhost:8080/users/register
-Content-Type: application/json
-
-{ "name": "A", "email": "bukan-email" }
-
-### 2. Test Berhasil (Harus Sukses 201)
-POST http://localhost:8080/users/register
-Content-Type: application/json
-
-{ "name": "Tamu Baru", "email": "tamu@gmail.com", "password": "password123" }
-
-### 3. Test Duplikat (Harus Gagal 409)
 POST http://localhost:8080/users/register
 Content-Type: application/json
 
 { "name": "Tamu Baru", "email": "tamu@gmail.com", "password": "password123" }
 
 ###
-
+# @name loginRequest
 POST http://localhost:8080/users/login
 Content-Type: application/json
 
 {"email": "tamu@gmail.com", "password": "password123" }
+
+###
+@authToken = {{loginRequest.response.body.result.token}}
+GET http://localhost:8080/users
+Authorization: Bearer {{authToken}}

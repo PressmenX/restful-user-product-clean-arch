@@ -1,12 +1,11 @@
 import env from "../../config/env";
 import IUserRepository from "../../repository/interfaces/IUserRepository";
-import { LoginUser } from "../../schemas/loginInput";
+import { LoginInput } from "../../types/user/LoginUser";
 import { AppError } from "../../utils/AppError";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-
 const makeLoginUser =
-  (repo: IUserRepository) => async (inputDTO: LoginUser) => {
+  (repo: IUserRepository) => async (inputDTO: LoginInput) => {
     const user = await repo.findByEmail(inputDTO.email);
 
     if (!user) {
@@ -25,7 +24,12 @@ const makeLoginUser =
       expiresIn: "1d",
     });
 
-    return token;
+    return {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      token,
+    };
   };
 
 export default makeLoginUser;

@@ -1,10 +1,15 @@
-import { LoginUser } from "../schemas/loginInput";
+import { LoginInput, LoginResponse } from "../types/user/LoginUser";
 
-const inLoginDTO = (body: LoginUser) => ({
+const loginReqDTO = (body: LoginInput) => ({
   email: body.email,
   password: body.password,
 });
 
-const outLoginDTO = (token: string) => token;
+const loginResDTO = (user: LoginResponse) => ({
+  id: user.id,
+  name: user.email,
+  email: user.email,
+  token: user.token,
+});
 
-export { inLoginDTO, outLoginDTO };
+export { loginReqDTO, loginResDTO };

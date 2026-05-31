@@ -6,6 +6,7 @@ import makeUserController from "../controllers/user.controller";
 import asyncError from "../utils/asyncError";
 import { makeUserUseCase } from "../use-cases/user";
 import { loginUserSchema } from "../schemas/loginInput";
+import authCheck from "../middlewares/authCheck";
 
 const userRouter = Router();
 const repo = makeUserRepository();
@@ -22,6 +23,12 @@ userRouter.post(
   '/login',
   validate(loginUserSchema),
   asyncError(controller.login)
+)
+
+userRouter.get(
+  '/',
+  authCheck,
+  asyncError(controller.getAll)
 )
 
 export default userRouter;

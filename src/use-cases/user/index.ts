@@ -4,7 +4,8 @@ import makeRegisterUser from "./registerUser";
 
 export const makeUserUseCase = (repo: IUserRepository) => ({
   register: makeRegisterUser(repo),
-  login : makeLoginUser(repo)
+  login: makeLoginUser(repo),
+  getAll: async () => await repo.findAll(),
 });
 
 export type IUserUseCase = ReturnType<typeof makeUserUseCase>;
