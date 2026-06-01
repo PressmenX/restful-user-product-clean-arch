@@ -8,7 +8,7 @@ const makeUserRepository = (): IUserRepository => {
 
   return {
     async findAll() {
-      return users ;
+      return users;
     },
     async findById(id: string) {
       const user = users.find((u) => u.id === id);
@@ -20,12 +20,27 @@ const makeUserRepository = (): IUserRepository => {
       if (!user) return null;
       return user;
     },
-    async save(userData: Omit<User, 'id'>) {
+    async save(userData: Omit<User, "id">) {
       const user = { id: randomUUID(), ...userData };
       users.push(user);
       return user;
     },
+    async update(id, userData) {
+      const index = users.findIndex((u) => u.id === id);
+      if (index === -1) return null;
+
+      const existingUser = users[index];
+      users[index] = { ...existingUser, ...userData, id };
+      return users[index];
+    },
+    async delete(id) {
+      const index = users.findIndex((u) => u.id === id);
+      if (index === -1) return false;
+
+      users.splice(index, 1);
+      return true;
+    },
   };
 };
 
-export default makeUserRepository
+export default makeUserRepository;

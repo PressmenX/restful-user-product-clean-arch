@@ -1,7 +1,7 @@
 POST http://localhost:8080/users/register
 Content-Type: application/json
 
-{ "name": "Tamu Baru", "email": "tamu@gmail.com", "password": "password123" }
+{ "name": "Tamu Baru", "email": "tamu@gmail.com", "password": "password123" , "role" : "admin"}
 
 ###
 # @name loginRequest

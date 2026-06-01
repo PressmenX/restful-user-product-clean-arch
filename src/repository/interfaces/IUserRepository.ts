@@ -5,4 +5,9 @@ export default interface IUserRepository {
   findByEmail: (email: string) => Promise<User | null>;
   findById: (id: string) => Promise<User | null>;
   save: (userData: Omit<User, "id">) => Promise<User>;
+  update: (
+    id: string,
+    userData: Partial<Omit<User, "id">>,
+  ) => Promise<User | null>;
+  delete: (id: string) => Promise<boolean>;
 }
