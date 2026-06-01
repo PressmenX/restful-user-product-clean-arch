@@ -14,3 +14,16 @@ Content-Type: application/json
 @authToken = {{loginRequest.response.body.result.token}}
 GET http://localhost:8080/users
 Authorization: Bearer {{authToken}}
+
+###
+@authToken = {{loginRequest.response.body.result.token}}
+GET http://localhost:8080/users/u-7821-abc-99
+Authorization: Bearer {{authToken}}
+
+###
+@authToken = {{loginRequest.response.body.result.token}}
+
+PUT http://localhost:8080/users/u-7821-abc-99
+Authorization: Bearer {{authToken}}
+
+{"email": "tamu@gma", "password": "password123" }

@@ -20,15 +20,19 @@ userRouter.post(
 );
 
 userRouter.post(
-  '/login',
+  "/login",
   validate(loginUserSchema),
-  asyncError(controller.login)
-)
+  asyncError(controller.login),
+);
 
-userRouter.get(
-  '/',
-  authCheck,
-  asyncError(controller.getAll)
-)
+userRouter.get("/", authCheck, asyncError(controller.getAll));
+
+userRouter.get("/:id", authCheck, asyncError(controller.getProfile));
+
+
+// TODO : PASANG SCHEMA DI PUT!
+userRouter.put("/:id", authCheck, asyncError(controller.update));
+
+userRouter.delete("/:id", authCheck, asyncError(controller.delete));
 
 export default userRouter;
