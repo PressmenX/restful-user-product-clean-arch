@@ -7,6 +7,7 @@ import asyncError from "../utils/asyncError";
 import { makeUserUseCase } from "../use-cases/user";
 import { loginUserSchema } from "../schemas/loginInput";
 import authCheck from "../middlewares/authCheck";
+import { updateInputSchema } from "../schemas/updateInput";
 
 const userRouter = Router();
 const repo = makeUserRepository();
@@ -29,9 +30,12 @@ userRouter.get("/", authCheck, asyncError(controller.getAll));
 
 userRouter.get("/:id", authCheck, asyncError(controller.getProfile));
 
-
-// TODO : PASANG SCHEMA DI PUT!
-userRouter.put("/:id", authCheck, asyncError(controller.update));
+userRouter.put(
+  "/:id",
+  authCheck,
+  validate(updateInputSchema),
+  asyncError(controller.update),
+);
 
 userRouter.delete("/:id", authCheck, asyncError(controller.delete));
 

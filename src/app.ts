@@ -4,12 +4,14 @@ import cors from "cors";
 import morgan from "morgan";
 import { errorHandler } from "./middlewares";
 import { healthRouter, userRouter } from "./routes";
+import requireJsonContent from "./middlewares/requireJsonContent";
 
 const app = express();
 
 app.use(helmet());
 app.use(cors());
 app.use(morgan("dev"));
+app.use(requireJsonContent)
 app.use(express.json());
 
 app.get("/", (_req, res) => {

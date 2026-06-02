@@ -24,6 +24,12 @@ Authorization: Bearer {{authToken}}
 @authToken = {{loginRequest.response.body.result.token}}
 
 PUT http://localhost:8080/users/u-7821-abc-99
+Content-Type: application/json
 Authorization: Bearer {{authToken}}
 
-{"email": "tamu@gma", "password": "password123" }
+{"email": "budi@co.id","name" : "Budi", "password": "pass1212", "role" : "admin" }
+
+###
+
+DELETE http://localhost:8080/users/u-7821-abc-99
+Authorization: Bearer {{authToken}}
