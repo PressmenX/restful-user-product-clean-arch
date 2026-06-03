@@ -9,8 +9,8 @@ interface UserController {
   login: RequestHandler;
   getAll: RequestHandler;
   getProfile: RequestHandler;
-  update: RequestHandler;
-  delete: RequestHandler;
+  updateMyProfile: RequestHandler;
+  deleteMyAccount: RequestHandler;
 }
 
 const makeUserController = (useCase: IUserUseCase): UserController => ({
@@ -57,18 +57,18 @@ const makeUserController = (useCase: IUserUseCase): UserController => ({
       data: profile,
     });
   },
-  update: async (req, res) => {
-    const id = req.params.id;
-    const result = await useCase.update(id, updateReqDTO(req.body));
+  updateMyProfile: async (req, res) => {
+    const id = req.user?.id ?? "";
+    const result = await useCase.updateMyProfile(id, updateReqDTO(req.body));
     res.status(200).json({
       status: "success",
       message: "Data updated successfully",
       updated: updateResDTO(result),
     });
   },
-  delete: async (req, res) => {
-    const id = req.params.id;
-    const deletedStatus = await useCase.delete(id);
+  deleteMyAccount: async (req, res) => {
+    const id = req.user?.id ?? "";
+    const deletedStatus = await useCase.deleteMyAccount(id);
     res.status(200).json({
       status: "success",
       message: "Data deleted successfully",

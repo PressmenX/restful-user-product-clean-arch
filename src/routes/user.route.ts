@@ -31,12 +31,12 @@ userRouter.get("/", authCheck, asyncError(controller.getAll));
 userRouter.get("/:id", authCheck, asyncError(controller.getProfile));
 
 userRouter.put(
-  "/:id",
+  "/me",
   authCheck,
   validate(updateInputSchema),
-  asyncError(controller.update),
+  asyncError(controller.updateMyProfile),
 );
 
-userRouter.delete("/:id", authCheck, asyncError(controller.delete));
+userRouter.delete("/me", authCheck, asyncError(controller.deleteMyAccount));
 
 export default userRouter;

@@ -17,13 +17,13 @@ Authorization: Bearer {{authToken}}
 
 ###
 @authToken = {{loginRequest.response.body.result.token}}
-GET http://localhost:8080/users/u-7821-abc-99
+GET http://localhost:8080/users/0d0b7d6a-1bd7-4be4-b705-144c862b7b97
 Authorization: Bearer {{authToken}}
 
 ###
 @authToken = {{loginRequest.response.body.result.token}}
 
-PUT http://localhost:8080/users/u-7821-abc-99
+PUT http://localhost:8080/users/me
 Content-Type: application/json
 Authorization: Bearer {{authToken}}
 
@@ -31,5 +31,5 @@ Authorization: Bearer {{authToken}}
 
 ###
 
-DELETE http://localhost:8080/users/u-7821-abc-99
+DELETE http://localhost:8080/users/me
 Authorization: Bearer {{authToken}}

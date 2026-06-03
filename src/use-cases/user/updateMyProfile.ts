@@ -3,9 +3,8 @@ import { updateInput } from "../../schemas/updateInput";
 import { AppError } from "../../utils/AppError";
 import bcrypt from "bcrypt";
 
-const makeUpdateUser =
-  (repo: IUserRepository) =>
-  async (id: string, changes: updateInput) => {
+const makeUpdateMyProfile =
+  (repo: IUserRepository) => async (id: string, changes: updateInput) => {
     const user = await repo.findById(id);
     if (!user) throw AppError.notFound("User not found");
 
@@ -25,4 +24,4 @@ const makeUpdateUser =
     return updatedUser;
   };
 
-export default makeUpdateUser;
+export default makeUpdateMyProfile;
