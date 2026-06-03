@@ -54,7 +54,7 @@ const makeUserController = (useCase: IUserUseCase): UserController => ({
       status: "success",
       message: "Data retrieved successfully",
       requestedBy: user?.id,
-      data: profile,
+      data: registerResDTO(profile),
     });
   },
   updateMyProfile: async (req, res) => {

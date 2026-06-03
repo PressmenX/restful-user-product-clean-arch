@@ -17,7 +17,8 @@ Authorization: Bearer {{authToken}}
 
 ###
 @authToken = {{loginRequest.response.body.result.token}}
-GET http://localhost:8080/users/0d0b7d6a-1bd7-4be4-b705-144c862b7b97
+@myId = {{loginRequest.response.body.result.id}}
+GET http://localhost:8080/users/{{myId}}
 Authorization: Bearer {{authToken}}
 
 ###
