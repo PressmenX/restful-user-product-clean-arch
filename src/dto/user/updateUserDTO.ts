@@ -1,5 +1,5 @@
-import { updateInput } from "../schemas/updateInput";
-import User from "../entities/User";
+import { updateInput } from "../../schemas/updateInput";
+import User from "../../entities/User";
 
 const updateReqDTO = (body: updateInput) => {
   let request: Partial<updateInput> = {};

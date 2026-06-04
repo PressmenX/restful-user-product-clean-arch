@@ -40,7 +40,7 @@ export const products: Product[] = [
     id: "p-v002-prod",
     name: "Keyboard Mekanik",
     price: 750000,
-    categoryId: "cat-102",
+    categoryId: "cat-103",
     stock: 12,
   },
 ];

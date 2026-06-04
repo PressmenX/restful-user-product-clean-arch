@@ -1,12 +1,11 @@
-import User from "../entities/User";
-import { RegisterUser } from "../schemas/registerInput";
+import User from "../../entities/User";
+import { RegisterUser } from "../../schemas/registerInput";
 
 const registerReqDTO = (body: RegisterUser) => ({
   name: body.name,
   email: body.email,
   password: body.password,
 });
-
 
 const registerResDTO = (user: User) => ({
   id: user.id,

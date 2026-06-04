@@ -1,4 +1,4 @@
-import { LoginInput, LoginResponse } from "../types/user/LoginUser";
+import { LoginInput, LoginResponse } from "../../types/user/LoginUser";
 
 const loginReqDTO = (body: LoginInput) => ({
   email: body.email,

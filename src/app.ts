@@ -3,7 +3,7 @@ import helmet from "helmet";
 import cors from "cors";
 import morgan from "morgan";
 import { errorHandler } from "./middlewares";
-import { healthRouter, userRouter } from "./routes";
+import { healthRouter, productRouter, userRouter } from "./routes";
 import requireJsonContent from "./middlewares/requireJsonContent";
 
 const app = express();
@@ -20,6 +20,7 @@ app.get("/", (_req, res) => {
 
 app.use("/health", healthRouter);
 app.use("/users", userRouter)
+app.use("/products", productRouter)
 
 app.use(errorHandler);
 

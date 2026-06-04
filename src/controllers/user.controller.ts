@@ -1,8 +1,8 @@
 import { RequestHandler } from "express";
-import { registerReqDTO, registerResDTO } from "../dto/registerUserDTO";
+import { registerReqDTO, registerResDTO } from "../dto/user/registerUserDTO";
 import { IUserUseCase } from "../use-cases/user";
-import { loginReqDTO, loginResDTO } from "../dto/loginUserDTO";
-import { updateReqDTO, updateResDTO } from "../dto/updateUserDTO";
+import { loginReqDTO, loginResDTO } from "../dto/user/loginUserDTO";
+import { updateReqDTO, updateResDTO } from "../dto/user/updateUserDTO";
 
 interface UserController {
   register: RequestHandler;
