@@ -1,8 +1,10 @@
 import { RequestHandler } from "express";
 import { ProductUseCases } from "../use-cases/product";
+import { productResDTO } from "../dto/product/productDTO";
 
 type ProductController = {
   getAllProduct: RequestHandler;
+  getProductById : RequestHandler;
 };
 
 const makeProductController = (
@@ -16,6 +18,15 @@ const makeProductController = (
       data: products,
     });
   },
+  getProductById : async (req, res) => {
+    const id = req.params.id
+    const product = await useCases.getProductById(id)
+    res.status(200).json({
+      status: "success",
+      message: "Data retrieved successfully",
+      data : productResDTO(product)
+    })
+  }
 });
 
 export default makeProductController

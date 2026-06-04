@@ -12,11 +12,9 @@ const makeGetAllProduct =
     const products = await productRepo.findAll();
     const responseProducts: ProductRes[] = await Promise.all(
       products.map(async (p) => {
-        let productRes: ProductWithCategory;
         const category = await categoryRepo.findById(p.categoryId);
-
-        productRes = { ...p, category };
-        return productResDTO(productRes);
+        const product = { ...p, category };
+        return productResDTO(product);
       }),
     );
 

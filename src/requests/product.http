@@ -1,2 +1,6 @@
+@url = http://localhost:8080/products
+GET {{url}}
 
-GET http://localhost:8080/products
+###
+
+GET {{url}}/p-v001-prod
