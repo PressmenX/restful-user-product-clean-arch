@@ -1,0 +1,342 @@
+openapi: 3.0.0
+info:
+  title: RESTful User & Product API
+  version: 1.0.0
+  description: Complete API documentation for User and Product management using Clean Architecture.
+
+servers:
+  - url: http://localhost:8080
+    description: Local Development Server
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    UserResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "u-7821-abc-99"
+        name:
+          type: string
+          example: "Daffa"
+        email:
+          type: string
+          format: email
+          example: "daffa@example.com"
+
+    ProductResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "p-v001-prod"
+        name:
+          type: string
+          example: "Kopi Gula Aren"
+        price:
+          type: integer
+          example: 25000
+        stock:
+          type: integer
+          example: 50
+        category:
+          type: object
+          properties:
+            id:
+              type: string
+              example: "cat-101"
+            name:
+              type: string
+              example: "Food & Beverage"
+
+    ErrorResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: "error"
+        type:
+          type: string
+          example: "VALIDATION_ERROR"
+        message:
+          type: string
+          example: "Invalid input data"
+
+paths:
+  /health:
+    get:
+      summary: Health Check Server
+      tags:
+        - System
+      responses:
+        "200":
+          description: Server Online
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "ok"
+                  version:
+                    type: string
+                    example: "1.0.0"
+
+  /users/register:
+    post:
+      summary: Register New User
+      tags:
+        - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - email
+                - password
+              properties:
+                name:
+                  type: string
+                  example: "Guest"
+                email:
+                  type: string
+                  example: "guest@gmail.com"
+                password:
+                  type: string
+                  example: "password123"
+      responses:
+        "201":
+          description: Registration successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "success"
+                  new:
+                    $ref: "#/components/schemas/UserResponse"
+        "409":
+          description: Email sudah digunakan
+        "422":
+          description: Invalid input
+
+  /users/login:
+    post:
+      summary: User Login 
+      tags:
+        - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - password
+              properties:
+                email:
+                  type: string
+                  example: "guest@gmail.com"
+                password:
+                  type: string
+                  example: "password123"
+      responses:
+        "200":
+          description: Login successful, token given
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "success"
+                  result:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      name:
+                        type: string
+                      email:
+                        type: string
+                      token:
+                        type: string
+        "422":
+          description: Invalid email or password
+
+  /users:
+    get:
+      summary: Get all users (For testing only)
+      tags:
+        - Users
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: Users successfully retrieved
+  /users/me:
+    put:
+      summary: Update my own profile
+      tags:
+        - Users
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: "Budi"
+                email:
+                  type: string
+                  example: "budi@co.id"
+                password:
+                  type: string
+                  example: "pass1212"
+      responses:
+        "200":
+          description: Profile updated
+    delete:
+      summary: Delete my own account
+      tags:
+        - Users
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: Account successfully deleted
+
+  /users/{id}:
+    get:
+      summary: Retrieve user profile by ID
+      tags:
+        - Users
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Profile details found
+
+  /products:
+    get:
+      summary: Get all products (Public)
+      tags:
+        - Products
+      responses:
+        "200":
+          description: Products retrieved successfully
+    post:
+      summary: Add new product (Login required)
+      tags:
+        - Products
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - price
+                - stock
+                - categoryId
+              properties:
+                name:
+                  type: string
+                  example: "Milk"
+                price:
+                  type: integer
+                  example: 12000
+                stock:
+                  type: integer
+                  example: 10
+                categoryId:
+                  type: string
+                  example: "cat-101"
+      responses:
+        "201":
+          description: Product created successfully
+
+  /products/{id}:
+    get:
+      summary: Get product details by ID (Public)
+      tags:
+        - Products
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Product details found
+    put:
+      summary: Update product (Login required)
+      tags:
+        - Products
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                price:
+                  type: integer
+                categoryId:
+                  type: string
+      responses:
+        "200":
+          description: Product updated successfully
+    delete:
+      summary: Delete product (Login required)
+      tags:
+        - Products
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Product deleted successfully
