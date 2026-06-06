@@ -7,6 +7,7 @@ import asyncError from "../utils/asyncError";
 import validate from "../middlewares/validate";
 import { createProductSchema } from "../schemas/product/createProductSchema";
 import authCheck from "../middlewares/authCheck";
+import { updateProductSchema } from "../schemas/product/updateProductSchema";
 
 const productRouter = Router();
 const mainRepo = makeProductRepository();
@@ -24,6 +25,13 @@ productRouter.post(
   asyncError(controller.createProduct),
 );
 
-// TODO : MEMBUAT UPDATE FEATURES
+productRouter.put(
+  "/:id",
+  authCheck,
+  validate(updateProductSchema),
+  asyncError(controller.updateProduct),
+);
+
+productRouter.delete("/:id", authCheck, asyncError(controller.deleteProduct));
 
 export default productRouter;

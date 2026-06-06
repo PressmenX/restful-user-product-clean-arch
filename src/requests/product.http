@@ -7,9 +7,13 @@ Content-Type: application/json
 @authToken = {{loginRequest.response.body.result.token}}
 @url = http://localhost:8080/products
 GET {{url}}
+
 ###
+
 GET {{url}}/p-v001-prod
+
 ###
+
 # @name CreateRequest
 POST {{url}}
 Authorization: Bearer {{authToken}}
@@ -25,3 +29,20 @@ Content-Type: application/json
 ###
 @createdId = {{CreateRequest.response.body.new.id}}
 GET {{url}}/{{createdId}}
+
+###
+
+PUT {{url}}/{{createdId}}
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+  "name" : "Mouse",
+  "price" : 8000,
+  "categoryId" : "cat-102"
+}
+
+###
+
+DELETE {{url}}/{{createdId}}
+Authorization: Bearer {{authToken}}
