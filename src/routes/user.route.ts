@@ -1,13 +1,13 @@
 import { Router } from "express";
 import validate from "../middlewares/validate";
-import { registerUserSchema } from "../schemas/registerInput";
+import { registerUserSchema } from "../schemas/user/registerInput";
 import makeUserRepository from "../repository/in-memory/InMemoryUserRepository";
 import makeUserController from "../controllers/user.controller";
 import asyncError from "../utils/asyncError";
 import { makeUserUseCase } from "../use-cases/user";
-import { loginUserSchema } from "../schemas/loginInput";
+import { loginUserSchema } from "../schemas/user/loginInput";
 import authCheck from "../middlewares/authCheck";
-import { updateInputSchema } from "../schemas/updateInput";
+import { updateInputSchema } from "../schemas/user/updateInput";
 
 const userRouter = Router();
 const repo = makeUserRepository();

@@ -1,6 +1,27 @@
+# @name loginRequest
+POST http://localhost:8080/users/login
+Content-Type: application/json
+
+{"email": "tamu@gmail.com", "password": "password123" }
+###
+@authToken = {{loginRequest.response.body.result.token}}
 @url = http://localhost:8080/products
 GET {{url}}
+###
+GET {{url}}/p-v001-prod
+###
+# @name CreateRequest
+POST {{url}}
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+  "name" : "Milk",
+  "price" : 12000,
+  "stock" : 10,
+  "categoryId" : "cat-101"
+}
 
 ###
-
-GET {{url}}/p-v001-prod
+@createdId = {{CreateRequest.response.body.new.id}}
+GET {{url}}/{{createdId}}

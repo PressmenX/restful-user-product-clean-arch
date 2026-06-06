@@ -1,5 +1,5 @@
 import IUserRepository from "../../repository/interfaces/IUserRepository";
-import { updateInput } from "../../schemas/updateInput";
+import { updateInput } from "../../schemas/user/updateInput";
 import { AppError } from "../../utils/AppError";
 import bcrypt from "bcrypt";
 

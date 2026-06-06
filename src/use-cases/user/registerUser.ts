@@ -1,5 +1,5 @@
 import IUserRepository from "../../repository/interfaces/IUserRepository";
-import { RegisterUser } from "../../schemas/registerInput";
+import { RegisterUser } from "../../schemas/user/registerInput";
 import { AppError } from "../../utils/AppError";
 import bcrypt from "bcrypt";
 

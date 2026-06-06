@@ -1,4 +1,4 @@
-import { updateInput } from "../../schemas/updateInput";
+import { updateInput } from "../../schemas/user/updateInput";
 import User from "../../entities/User";
 
 const updateReqDTO = (body: updateInput) => {

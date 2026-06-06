@@ -5,6 +5,7 @@ import { productResDTO } from "../dto/product/productDTO";
 type ProductController = {
   getAllProduct: RequestHandler;
   getProductById : RequestHandler;
+  createProduct :RequestHandler;
 };
 
 const makeProductController = (
@@ -25,6 +26,14 @@ const makeProductController = (
       status: "success",
       message: "Data retrieved successfully",
       data : productResDTO(product)
+    })
+  },
+  createProduct : async (req, res) => {
+    const product = await useCases.createProduct(req.body)
+    res.status(201).json({
+      status: "success",
+      message: "Data retrieved successfully",
+      new : productResDTO(product),
     })
   }
 });

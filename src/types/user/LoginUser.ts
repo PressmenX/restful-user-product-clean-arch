@@ -1,5 +1,5 @@
 import z from "zod";
-import { loginUserSchema } from "../../schemas/loginInput";
+import { loginUserSchema } from "../../schemas/user/loginInput";
 
 type LoginInput = z.infer<typeof loginUserSchema>;
 interface LoginResponse {

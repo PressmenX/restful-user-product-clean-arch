@@ -1,5 +1,5 @@
 import User from "../../entities/User";
-import { RegisterUser } from "../../schemas/registerInput";
+import { RegisterUser } from "../../schemas/user/registerInput";
 
 const registerReqDTO = (body: RegisterUser) => ({
   name: body.name,
