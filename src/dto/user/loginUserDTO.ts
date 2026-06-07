@@ -7,7 +7,7 @@ const loginReqDTO = (body: LoginInput) => ({
 
 const loginResDTO = (user: LoginResponse) => ({
   id: user.id,
-  name: user.email,
+  name: user.name,
   email: user.email,
   token: user.token,
 });
